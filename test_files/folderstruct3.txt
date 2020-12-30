@@ -1,0 +1,15 @@
+myfolder
+	myfile.txt
+		mycontents
+		morecontents
+	myfile.py
+		def hi(x):
+			x = x * 2
+			return x
+	nextfolder
+		anotherfolder
+			myfile.txt
+				helloworld
+last folder
+	finalfile.js
+		console.log("hello world");

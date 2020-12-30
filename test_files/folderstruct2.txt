@@ -1,0 +1,13 @@
+myfolder
+	myfile.txt
+		mycontents
+		morecontents
+	myfile.txt
+		helloworld
+	nextfolder
+		anotherfolder
+			myfile.txt
+				helloworld
+last folder
+	finalfile.js
+		helloworld

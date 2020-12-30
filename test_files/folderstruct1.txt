@@ -1,0 +1,13 @@
+06-basic_syntax
+07-primitive_data_types
+08-arrays
+09-objects
+10-conditional_statements
+11-functions
+12-loops
+13-advanced_iteration
+14-manipulating_dom
+15-events
+16-working_with_api
+17-requests
+18-api_project_starter_files
