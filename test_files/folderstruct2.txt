@@ -1,13 +1,13 @@
-myfolder
-	myfile.txt
+* myfolder
+	* myfile.txt
 		mycontents
 		morecontents
-	myfile.txt
+	* myfile.txt
 		helloworld
-	nextfolder
-		anotherfolder
-			myfile.txt
+	* nextfolder
+		* anotherfolder
+			* myfile.txt
 				helloworld
-last folder
-	finalfile.js
+* last folder
+	* finalfile.js
 		helloworld
