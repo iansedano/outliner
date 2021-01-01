@@ -38,6 +38,10 @@ def lexer(path):
 
 		previous_tok = current_tok
 		current_line = current_line + 1 if c == '\n' else current_line
+
+	if current_lexeme != []:
+		lexeme_tok = token('<STRING>', ''.join(current_lexeme).strip(), current_line)
+		previous_tok.next = lexeme_tok
 		
 	return root
 
@@ -46,6 +50,7 @@ def print_lex(tok):
 	while tok:
 		print(tok.tok_type, tok.value, tok.line_no)
 		tok = tok.next
+
 
 if __name__ == "__main__":
 
