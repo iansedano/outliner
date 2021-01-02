@@ -1,8 +1,3 @@
-"""
-If there is an asterisk anywhere unexpected it will not
-produce the right result
-"""
-
 import os
 
 class token:
@@ -15,66 +10,66 @@ class token:
 STRUCTURE_TOKENS = {
 	'\n'  :   '<NEW_LINE>',
 	'\t'  :   '<TAB>',
-	# Will interpret any * as ITEM even though may be part of content.
-	'*'   :   '<ITEM>' 
 }
 
 def lexer(path):
 	with open(path) as mydata:
 			data = mydata.read()
 
-	current_lexeme = []
-	current_line = 1
-	root_set = False
+	i = 0
+	indent_level = 0
+	line_no = 1
+	current_lex = []
+	root = None
 
-	for i, c in enumerate(data):
+	while i < len(data):
 
-		if c in STRUCTURE_TOKENS:
-			if current_lexeme != []:
+		char = data[i]
 
-				# Create trailing lexeme token
-				lexeme_tok = token(
-					'<STRING>',
-					''.join(current_lexeme).strip(),
-					current_line
+		#print(repr(char), current_lex)
+
+		if char in STRUCTURE_TOKENS:
+			if current_lex != []:
+				lex = token(
+					tok_type = '<ITEM>',
+					value = ''.join(current_lex),
+					line_no = line_no
 					)
+				current_lex = []
 
-				previous_tok.next = lexeme_tok
-				previous_tok = lexeme_tok
-				current_lexeme = []
+				if line_no == 1:
+					root = lex
+				else:
+					previous_tok.next = lex
+				
+				previous_tok = lex
 
-			# Create structure token
 			current_tok = token(
-				STRUCTURE_TOKENS[c],
-				repr(c),
-				current_line
+				tok_type = STRUCTURE_TOKENS[char],
+				value = repr(char),
+				line_no = line_no
 				)
 
-			# Set root if not set, else link to previous
-			if current_line == 1 and root_set == False:
-				root = current_tok
-				root_set = True
-				previous_tok = root
-			else:
-				previous_tok.next = current_tok
+			previous_tok.next = current_tok
+			previous_tok = current_tok
 
+			if char == '\n':
+				line_no += 1
 		else:
-			current_lexeme.append(c)
+			current_lex.append(char)
 
-		previous_tok = current_tok
-		current_line = current_line + 1 if c == '\n' else current_line
 
-	# Deal with the last line since no EOF detection
-	if current_lexeme != []:
+		i += 1
 
-		lexeme_tok = token(
-			'<STRING>',
-			''.join(current_lexeme).strip(),
-			current_line
+	if current_lex != []:
+		lex = token(
+			tok_type = '<ITEM>',
+			value = ''.join(current_lex),
+			line_no = line_no
 			)
 
-		previous_tok.next = lexeme_tok
-		
+		previous_tok.next = lex
+
 	return root
 
 def print_lex(tok):
