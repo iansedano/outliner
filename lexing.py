@@ -1,3 +1,8 @@
+"""
+If there is an asterisk anywhere unexpected it will not
+produce the right result
+"""
+
 import os
 
 class token:
@@ -10,7 +15,8 @@ class token:
 STRUCTURE_TOKENS = {
 	'\n'  :   '<NEW_LINE>',
 	'\t'  :   '<TAB>',
-	'*'   :   '<ITEM>'
+	# Will interpret any * as ITEM even though may be part of content.
+	'*'   :   '<ITEM>' 
 }
 
 def lexer(path):
@@ -18,7 +24,8 @@ def lexer(path):
 			data = mydata.read()
 
 	current_lexeme = []
-	current_line = 1;
+	current_line = 1
+	root_set = False
 
 	for i, c in enumerate(data):
 
@@ -43,12 +50,14 @@ def lexer(path):
 				current_line
 				)
 
-			# Set root
-			if current_line == 1:
+			# Set root if not set, else link to previous
+			if current_line == 1 and root_set == False:
 				root = current_tok
+				root_set = True
+				previous_tok = root
 			else:
 				previous_tok.next = current_tok
-		
+
 		else:
 			current_lexeme.append(c)
 
@@ -75,6 +84,7 @@ def print_lex(tok):
 		tok = tok.next
 
 
+# Test cases
 if __name__ == "__main__":
 	print("======================================")
 	lexemes = lexer('test_files\\folderstruct1.txt')
