@@ -4,38 +4,29 @@ from lexing import *
 class node:
 	def __init__(
 			self,
-			name = '',
 			node_type = '',
-			content = '',
-			parent = ''
+			content   = '',
+			parent    = ''
 			):
-		self.name       = name
 		self.node_type  = node_type
 		self.content    = content
 		self.parent     = parent
 
-def parse(lexemes):
-	print(lexemes)
-	root = node(name = 'root')
-	i = 0
-	tab_level = 0
 
-	while i < len(lexemes):
-		lex = lexemes[i]
+def parse(root_lex):
+
+
+	root = node(
+		node_type = root_lex.tok_type,
+		content = root_lex.value,
+		parent = None
+		)
+
+	while root_lex:
 
 		if lex == '<ITEM>':
-			i++;
 
-			name = lexemes[i]
-			node_type = 'file' if '.' in name else 'folder'
-			content = ''
-
-			while :
-
-			node(
-				name = lexemes[i],
-				node_type = 'file' if '.' in lexemes[i] else 'folder',
-				)
+			lex.value
 
 
 

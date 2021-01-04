@@ -4,7 +4,7 @@ myfolder
 		morecontents
 	myfile.py
 		def hi(x):
-			x = x 2
+			x = x * 2
 			return x
 	nextfolder
 		anotherfolder
