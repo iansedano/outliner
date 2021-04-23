@@ -30,3 +30,7 @@ If freedom is to be given to use any file type: For example in this source file
 
 Then the `*` in the Python file will be interpreted as an ITEM.
 
+
+# Restrictions
+
+- any line with a `.` will be considered a file and not a folder (this does not apply to contents of a file)
