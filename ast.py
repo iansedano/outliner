@@ -19,12 +19,12 @@ def build_tree(tok):
 	current_tab_level = 0
 
 	print("====ROOT CREATED, STARTING TREE BUILD====")
-	root.children, _temp = build_helper(tok, root)
+	root.children, _temp = build_helper(tok, [])
 
 	return root
 
 
-def build_helper(tok, parent_node):
+def build_helper(tok, path):
 
 	print("Initializing siblings for current token")
 	print(tok.line_no, tok.tok_type, tok.value)
@@ -49,7 +49,10 @@ def build_helper(tok, parent_node):
 
 		elif next_token.tab_level > tok.tab_level:
 			print("next token is a child of this one")
-			current_node.children, next_token = build_helper(next_token, current_node)
+			current_node.children, next_token = build_helper(
+				next_token,
+				path.append(current_node)
+			)
 
 		elif next_token.tab_level == tok.tab_level:
 			print("next token is a sibling!")
