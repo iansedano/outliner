@@ -10,6 +10,7 @@ myfolder
 		anotherfolder
 			myfile.txt
 				helloworld
+		emptyfile.md
 last folder
 	finalfile.js
 		console.log("hello world");
