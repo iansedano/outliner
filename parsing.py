@@ -1,5 +1,5 @@
 from lexing import *
-import re
+# import re
 
 class token2:
 	def __init__(
@@ -45,13 +45,7 @@ def parse(root_lex):
 	lex = root_lex
 	while lex:
 
-		
-		
-		
-
 		if in_file == False:
-
-			
 
 			if lex.tok_type == '<ITEM>':
 				
@@ -62,7 +56,6 @@ def parse(root_lex):
 					file_tab_level = tab_level
 					file_line_no_start = line_no
 					
-
 				else:
 					
 					tok_type= "<FOLDER>"
@@ -116,8 +109,6 @@ def parse(root_lex):
 					root = tok2
 
 				file_tab_level = None
-
-
 				continue
 
 			elif tab_level > file_tab_level:
@@ -145,7 +136,6 @@ def parse(root_lex):
 
 					if line_no == 1:
 						root = tok2
-
 					break
 
 		# ----
