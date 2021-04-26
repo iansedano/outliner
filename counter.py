@@ -3,7 +3,7 @@ class Counter:
         self,
         start,
         item_count=None,
-        increment=None,
+        increment=1,
         pad=None
     ):
         self.start = start

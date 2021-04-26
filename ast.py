@@ -78,7 +78,7 @@ def print_children(root, level = 0):
 
 	tab = '\t'*level
 
-	# print(tab, root.node_type, root.value)
+	print(tab, root.node_type, root.value)
 
 	if root.children != []:
 		for node in root.children:
@@ -102,5 +102,6 @@ if __name__ == "__main__":
 
 	root = build_tree(second_pass3)
 
-	# print("\n\n STARTING PRINT \n\n")
+	print("\n\n STARTING PRINT \n\n")
+	# 
 	print_children(root)

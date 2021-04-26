@@ -1,6 +1,7 @@
 from lexing import *
 from parsing import *
 from ast import *
+from add_numbers import *
 
 import os
 
@@ -49,6 +50,7 @@ def create_folders(source, output_path):
 	lexemes = lexer(source)
 	tokens = parse(lexemes)
 	tree_root = build_tree(tokens)
+	numbered_tree_root = number_tree(tree_root, 3)
 
 	create_helper(tree_root, output_path)
 
