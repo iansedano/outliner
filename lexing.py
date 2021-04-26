@@ -1,6 +1,6 @@
 import os
 
-class token:
+class Lexeme:
 	def __init__(self, tok_type, value, line_no):
 		self.tok_type = tok_type
 		self.value = value
@@ -17,7 +17,6 @@ def lexer(path):
 			data = mydata.read()
 
 	i = 0
-	indent_level = 0
 	line_no = 1
 	current_lex = []
 	root = None
@@ -30,7 +29,7 @@ def lexer(path):
 
 		if char in STRUCTURE_TOKENS:
 			if current_lex != []:
-				lex = token(
+				lex = Lexeme(
 					tok_type = '<ITEM>',
 					value = ''.join(current_lex),
 					line_no = line_no
@@ -44,7 +43,7 @@ def lexer(path):
 				
 				previous_tok = lex
 
-			current_tok = token(
+			current_tok = Lexeme(
 				tok_type = STRUCTURE_TOKENS[char],
 				value = repr(char),
 				line_no = line_no
@@ -62,7 +61,7 @@ def lexer(path):
 		i += 1
 
 	if current_lex != []:
-		lex = token(
+		lex = Lexeme(
 			tok_type = '<ITEM>',
 			value = ''.join(current_lex),
 			line_no = line_no
@@ -71,6 +70,7 @@ def lexer(path):
 		previous_tok.next = lex
 
 	return root
+
 
 def print_lex(tok):
 

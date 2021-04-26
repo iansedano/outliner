@@ -1,7 +1,7 @@
 from lexing import *
 # import re
 
-class token2:
+class token:
 	def __init__(
 			self,
 			tok_type ,
@@ -92,7 +92,7 @@ def parse(root_lex):
 				in_file = False
 				
 
-				tok2 = token2(
+				tok2 = token(
 					tok_type = '<CONTENT>',
 					value = "".join(content_string),
 					tab_level = file_tab_level + 1,
@@ -124,7 +124,7 @@ def parse(root_lex):
 					content_string.append(lex.value)
 
 				if lex.next is None:
-					tok2 = token2(
+					tok2 = token(
 						tok_type = '<CONTENT>',
 						value = "".join(content_string),
 						tab_level = file_tab_level + 1,
@@ -147,7 +147,7 @@ def parse(root_lex):
 
 		if need_to_create_token:
 			
-			tok2 = token2(
+			tok2 = token(
 				tok_type = tok_type,
 				value = current_value,
 				tab_level = tab_level,

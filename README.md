@@ -3,37 +3,72 @@
 To aid in the creation and transition from idea, to draft, to outline, to file structure, and back again if needed.
 
 
-# Issues
+## Purpose
 
-Have run into a large issue - using `*` to flag ITEMS, or any reserved identifier like `#` or `$` is that my simple implementation of a lexer will pick these up.
-
-If freedom is to be given to use any file type: For example in this source file
+Ever make an outline like this?
 
 ```
-* myfolder
-    * myfile.txt
-        mycontents
-        morecontents
-    * myfile.py
-        def hi(x):
-            x = x * 2
-            return x
-    * nextfolder
-        * anotherfolder
-            * myfile.txt
-                helloworld
-* last folder
-    * finalfile.js
-        console.log("hello world");
-
+Section 1
+    Chapter 1
+        Intro to characters
+    Chapter 2
+        Starting the journey
+    Chapter 3
+        On their way
+Section 2
+    Chapter 4
+        Running into trouble
+    Chapter 5
+        Running into more trouble
+    Chapter 6
+        Breakdown
+Section 3
+    Chapter 7
+        Meeting friend
+    Chapter 8
+        Overcoming troubles
+    Chapter 9
+        Arriving back home
 ```
 
-Then the `*` in the Python file will be interpreted as an ITEM.
+This project will convert a text file like this into folders nested according to their tab level. This text file, as it stands, would just create folders for each line. Though if you wanted to have files with content you could write it like this:
 
 
-# Restrictions
+```
+Section 1
+    Chapter 1.md
+        Intro to characters
+        Bill, Bob
+        Jill, Jane
+    Chapter 2.md
+        Starting the journey
+    Chapter 3.md
+        On their way
+```
 
-- any line with a `.` will be considered a file and not a folder (this does not apply to contents of a file)
+This would output one folder called "Chapter 1" containging three markdown files each with some content. The file "Chapter 1" would contain 3 lines of content.
+
+You can create any plain text file type you want:
+
+```
+Project 1
+    main.py
+        def hello():
+            print("hello world")
+```
+
+Will create a folder with a python file with the following content:
+
+```python
+def hello():
+    print("hello world")
+```
+
+## Important Points
+
+1. Any line with a `.` will be considered a file and not a folder (this does not apply to contents of a file)
+
+2. Beware when calling files or folders the same name, they will be overwritten.
 
 ```
 myfolder
@@ -52,9 +87,38 @@ myfolder
         helloworld
 ```
 
-Since the name is the same, it will be overwritten.
+3. Bear in mind that file systems implement their own ordering. So if you have a source file like this:
 
-# TODO
+```
+instructions
+    first step.md
+    second step.md
+    third step.md
+    fourth step.md
+```
 
-- the first stake is called tokens, this is wrong? Scanning, tokenizing, lexeing, parsing
-- Warn about overwriting.
+Once they are created, you will probably end up with a folder with the files ordered like this:
+
+```
+first step.md
+fourth step.md
+second step.md
+third step.md
+```
+
+## Usage
+
+1. Clone this repository.
+1. Open `main.py`.
+1. Modify the relevant paths and run it.
+
+For example:
+
+```python
+from creator import create_folders
+
+source_file = "C:\\Projects\\Book\\outline.txt"
+output = "C:\\Projects\\Book\\Outliner_Output"
+
+create_folders(source_file, output)
+```

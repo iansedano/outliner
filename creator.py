@@ -37,7 +37,7 @@ def create_helper(node, path):
 def create_folders(source, output_path):
 
 	source = os.path.join(source)
-	if not os.path.is_file(source):
+	if not os.path.isfile(source):
 		raise Exception("invalid file")
 
 	output_path = os.path.join(output_path)
@@ -54,6 +54,8 @@ def create_folders(source, output_path):
 
 
 def create_path(path):
+
+	# TODO Cache results somehow to not check root every time.
 
 	path_list = path.split("\\")
 	path_list[0] = path_list[0] + "\\"
@@ -101,4 +103,6 @@ if __name__ == "__main__":
 	print("\n\n=====STARTING=====\n\n")
 
 	create(tree1, "1")
-
+	create(tree2, "2")
+	create(tree3, "3")
+	create(tree4, "4")
