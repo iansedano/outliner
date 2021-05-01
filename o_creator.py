@@ -4,13 +4,14 @@ from o_ast import build_tree
 from add_numbers import number_tree
 
 import os
-import pathlib
-
+from pathlib import Path
+import shutil
 
 def create(node, name):
 
-	path = os.path.join(os.getcwd(), "output", name)
+	path = Path.cwd() / "output" / name
 	
+
 	create_helper(node, path)
 	
 
@@ -22,13 +23,14 @@ def create_helper(node, path):
 			create_helper(n, path)
 
 	elif node.node_type == '<FOLDER>':
-		folder_path = os.path.join(path, node.value)
-		create_path(folder_path)
+		folder_path = path / node.value
+		if not folder_path.exists():
+			Path.mkdir(folder_path, parents=True)
 		for n in node.children:
 			create_helper(n, folder_path)
 
 	elif node.node_type == '<FILE>':
-		file_path = os.path.join(path, node.value)
+		file_path = path / node.value
 		with open(file_path, 'w') as f:
 			for c in node.children:
 				if c.node_type != "<CONTENT>":
@@ -38,16 +40,16 @@ def create_helper(node, path):
 
 def create_main(source, output_path, number = False):
 
-	source = os.path.join(source)
-	if not os.path.isfile(source):
+	source = Path(source)
+	if not Path.is_file(source):
 		raise Exception("invalid file")
 
-	output_path = os.path.join(output_path)
-	create_path(output_path)
+	output_path = Path(output_path)
+	if output_path.exists():
+		shutil.rmtree(output_path)
 
-	for f in os.listdir(output_path):
-		os.remove(os.path.join(output_path, f))
-
+	Path.mkdir(output_path)
+	
 	with open(source) as mydata:
 		source_text = mydata.read()
 	lexemes = lex(source_text)
@@ -60,34 +62,6 @@ def create_main(source, output_path, number = False):
 	create_helper(tree_root, output_path)
 
 
-def create_path(path):
-
-	# TODO Cache results somehow to not check root every time.
-
-	path_list = path.split("\\")
-	path_list[0] = path_list[0] + "\\"
-
-	is_file = "." in path_list[-1]
-
-	
-	if is_file:
-		file = path_list.pop(-1)
-
-	path_construct = ""
-
-	for p in path_list:
-		path_construct = os.path.join(path_construct, p)
-		if not os.path.exists(path_construct):
-			print("making directory " + path_construct)
-			os.mkdir(path_construct)
-		else:
-			print(path_construct + " already exists")
-
-	# if is_file:
-	# 	path_construct = os.path.join(path_construct, file)
-	# 	if not os.path.is_file(path_construct):
-			
-
 
 if __name__ == "__main__":
 	
@@ -99,7 +73,7 @@ if __name__ == "__main__":
 		data3 = mydata.read()
 	with open('test_files\\folderstruct4.txt') as mydata:
 		data4 = mydata.read()
-		
+
 	lexemes1 = lex(data1)
 	lexemes2 = lex(data2)
 	lexemes3 = lex(data3)
