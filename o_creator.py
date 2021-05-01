@@ -1,9 +1,10 @@
-from lexing import *
-from parsing import *
-from ast import *
-from add_numbers import *
+from o_lexer import lex
+from o_parser import parse
+from o_ast import build_tree
+from add_numbers import number_tree
 
 import os
+import pathlib
 
 
 def create(node, name):
@@ -35,7 +36,7 @@ def create_helper(node, path):
 				f.write(c.value)
 
 
-def create_folders(source, output_path):
+def create_main(source, output_path, number = False):
 
 	source = os.path.join(source)
 	if not os.path.isfile(source):
@@ -47,10 +48,14 @@ def create_folders(source, output_path):
 	for f in os.listdir(output_path):
 		os.remove(os.path.join(output_path, f))
 
-	lexemes = lexer(source)
+	with open(source) as mydata:
+		source_text = mydata.read()
+	lexemes = lex(source_text)
 	tokens = parse(lexemes)
 	tree_root = build_tree(tokens)
-	numbered_tree_root = number_tree(tree_root, 3)
+
+	if number == True:
+		number_tree(tree_root, 3)
 
 	create_helper(tree_root, output_path)
 
@@ -86,11 +91,19 @@ def create_path(path):
 
 if __name__ == "__main__":
 	
-
-	lexemes1 = lexer('test_files\\folderstruct1.txt')
-	lexemes2 = lexer('test_files\\folderstruct2.txt')
-	lexemes3 = lexer('test_files\\folderstruct3.txt')
-	lexemes4 = lexer('test_files\\folderstruct4.txt')
+	with open('test_files\\folderstruct1.txt') as mydata:
+		data1 = mydata.read()
+	with open('test_files\\folderstruct2.txt') as mydata:
+		data2 = mydata.read()
+	with open('test_files\\folderstruct3.txt') as mydata:
+		data3 = mydata.read()
+	with open('test_files\\folderstruct4.txt') as mydata:
+		data4 = mydata.read()
+		
+	lexemes1 = lex(data1)
+	lexemes2 = lex(data2)
+	lexemes3 = lex(data3)
+	lexemes4 = lex(data4)
 
 	second_pass1 = parse(lexemes1)
 	second_pass2 = parse(lexemes2)

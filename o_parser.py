@@ -1,5 +1,19 @@
-from lexing import *
-# import re
+"""Stage 2
+Takes lexemes from previous stage and identifies them as:
+- FOLDERS
+- FILES
+- CONTENT
+
+The structure is defined by its tab level.
+
+FILES are identified by checking if they contain a period. For this reason
+trying to create folders that start with a dot, i.e. ".temp" will not work. They
+will be interpreted as a file.
+CONTENT is identified as everything "beneath" a file. The parser goes lexeme by
+lexeme until it reaches something it identifies as a file. Then everything a tab
+level or more greater than the file, is considered a file.
+"""
+
 
 class token:
 	def __init__(
@@ -9,14 +23,11 @@ class token:
 			tab_level,
 			line_no
 			):
-		self.tok_type  	= tok_type
-		self.value    	= value
+		self.tok_type  	= tok_type # FILE | FOLDER | CONTENT
+		self.value    	= value # File name | Folder Name | File Contents
 		self.tab_level  = tab_level
 		self.line_no 	= line_no
 		self.next 		= None
-
-
-# Node Type can be FOLDER, FILE, CONTENT
 
 def parse(root_lex):
 
@@ -73,7 +84,6 @@ def parse(root_lex):
 			
 
 		elif in_file == True:
-			# Do I need to keep track of the first line of content?
 			
 			if line_no == file_line_no_start:
 				if lex.tok_type != '<NEW_LINE>':
@@ -174,13 +184,3 @@ def print_lex2(tok):
 	while tok:
 		print(tok.line_no, tok.tok_type, tok.value, tok.tab_level)
 		tok = tok.next
-
-if __name__ == "__main__":
-	lexemes1 = lexer('test_files\\folderstruct1.txt')
-	lexemes2 = lexer('test_files\\folderstruct2.txt')
-	lexemes3 = lexer('test_files\\folderstruct3.txt')
-
-	second_pass = parse(lexemes3)
-
-	print("===========FINAL RESULT===========")
-	print_lex2(second_pass)

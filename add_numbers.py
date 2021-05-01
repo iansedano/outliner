@@ -1,6 +1,14 @@
-from lexing import lexer
-from parsing import parse
-from ast import *
+"""Stage 4 (Optional)
+Takes the root of a tree and numbers all the siblings
+
+Root
+	01
+	02
+		01
+		02
+	03
+	04
+"""
 from counter import Counter
 
 def number_tree(root, pad):
@@ -48,30 +56,3 @@ def number_files(files, pad):
 	counter = Counter(0, pad = pad)
 	for n in files:
 		n.value = counter.i() + n.value
-
-
-if __name__ == "__main__":
-	# print("\n\n=====STARTING=====\n\n")
-
-	lexemes1 = lexer('test_files\\folderstruct1.txt')
-	lexemes2 = lexer('test_files\\folderstruct2.txt')
-	lexemes3 = lexer('test_files\\folderstruct3.txt')
-	lexemes4 = lexer('test_files\\folderstruct4.txt')
-
-	second_pass1 = parse(lexemes1)
-	second_pass2 = parse(lexemes2)
-	second_pass3 = parse(lexemes3)
-	second_pass4 = parse(lexemes4)
-
-	root1 = build_tree(second_pass1)
-	root2 = build_tree(second_pass2)
-	root3 = build_tree(second_pass3)
-	root4 = build_tree(second_pass4)
-
-	Nroot1 = number_tree(root1, 3)
-	Nroot2 = number_tree(root2, 3)
-	Nroot3 = number_tree(root3, 3)
-	Nroot4 = number_tree(root4, 3)
-
-	print_children(Nroot3)
-	

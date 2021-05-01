@@ -1,4 +1,12 @@
-import os
+"""Stage 1
+Takes a string and splits it into one of three lexemes:
+
+- New line
+- Tab
+- Item
+
+Items will later become folders, files or file content.
+"""
 
 class Lexeme:
 	def __init__(self, tok_type, value, line_no):
@@ -12,10 +20,9 @@ STRUCTURE_TOKENS = {
 	'\t'  :   '<TAB>',
 }
 
-def lexer(path):
-	with open(path) as mydata:
-			data = mydata.read()
-
+def lex(data):
+	"""Transform string into lexemes
+	"""
 	i = 0
 	line_no = 1
 	current_lex = []
@@ -24,8 +31,6 @@ def lexer(path):
 	while i < len(data):
 
 		char = data[i]
-
-		#print(repr(char), current_lex)
 
 		if char in STRUCTURE_TOKENS:
 			if current_lex != []:
@@ -77,16 +82,3 @@ def print_lex(tok):
 	while tok:
 		print(tok.tok_type, tok.value, tok.line_no)
 		tok = tok.next
-
-
-# Test cases
-if __name__ == "__main__":
-	print("======================================")
-	lexemes = lexer('test_files\\folderstruct1.txt')
-	print_lex(lexemes)
-	print("======================================")
-	lexemes = lexer('test_files\\folderstruct2.txt')
-	print_lex(lexemes)
-	print("======================================")
-	lexemes = lexer('test_files\\folderstruct3.txt')
-	print_lex(lexemes)

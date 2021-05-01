@@ -1,16 +1,25 @@
-from lexing import *
-from parsing import *
-from ast import *
-from creator import *
+from o_lexer import lex
+from o_parser import parse
+from o_ast import build_tree
+from o_creator import create
 import os
 import glob
 
 
 
-lexemes1 = lexer('test_files\\folderstruct1.txt')
-lexemes2 = lexer('test_files\\folderstruct2.txt')
-lexemes3 = lexer('test_files\\folderstruct3.txt')
-lexemes4 = lexer('test_files\\folderstruct4.txt')
+with open('test_files\\folderstruct1.txt') as mydata:
+	data1 = mydata.read()
+with open('test_files\\folderstruct2.txt') as mydata:
+	data2 = mydata.read()
+with open('test_files\\folderstruct3.txt') as mydata:
+	data3 = mydata.read()
+with open('test_files\\folderstruct4.txt') as mydata:
+	data4 = mydata.read()
+
+lexemes1 = lex(data1)
+lexemes2 = lex(data2)
+lexemes3 = lex(data3)
+lexemes4 = lex(data4)
 
 second_pass1 = parse(lexemes1)
 second_pass2 = parse(lexemes2)
