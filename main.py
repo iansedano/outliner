@@ -1,6 +1,6 @@
-from creator import create_folders
+from o_creator import create_main
 
-source_file = "D:\\Dropbox\\Desktop\\ReactFolderTemp\\numbered_folders.txt"
-output = "D:\\Dropbox\\Desktop\\ReactFolderTemp\\output"
+source_file = "/home/i/Dropbox/Desktop/outliner_linux_test/outline.txt"
+output = "/home/i/Dropbox/Desktop/outliner_linux_test/output"
 
-create_main(source_file, output)
+create_main(source_file, output, number = True)

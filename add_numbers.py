@@ -25,7 +25,6 @@ def number_tree(root, pad):
 	else:
 		raise Exception("invalid root")
 
-	print(folders)
 	number_folders(folders, pad)
 	number_files(files, pad)
 
