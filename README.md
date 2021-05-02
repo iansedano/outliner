@@ -106,6 +106,8 @@ second step.md
 third step.md
 ```
 
+For this reason you can use the `number` argument as `True` in `create_main` to automatically number the folders and files so that they keep their order.
+
 ## Usage
 
 1. Clone this repository.
@@ -115,10 +117,12 @@ third step.md
 For example:
 
 ```python
-from creator import create_folders
+from o_creator import create_main
 
-source_file = "C:\\Projects\\Book\\outline.txt"
-output = "C:\\Projects\\Book\\Outliner_Output"
+# Insert full Linux (no ~) or Windows path here
+source_file = "/home/i/Dropbox/Desktop/outliner_linux_test/outline.txt"
+output = "/home/i/Dropbox/Desktop/outliner_linux_test/output"
 
-create_folders(source_file, output)
+# the argument number here is used to number the output folders and files
+create_main(source_file, output, number = True)
 ```
