@@ -2,73 +2,34 @@
 
 Long term goal is to make this a GUI app with Qt.
 
-### Clean up
+### Done
 
 - clean up names, Scanner, Lexer, Tokenizer, Parser
+- Line Number Handling
 
 
-### Error Checking
-
-- Add warning about file names
+### Need
+- CLI
+- be able to get folder structure into text document without also getting content. (for simple reordering of files)
 - Run tests with empty lines to check behavior
 - Test with bad tab structure:
-
-```
-folder
-    file.txt
-folder
+    ```
+    folder
         file.txt
-```
+    folder
+            file.txt
+    ```
 
-### Line Number Handling Feature
-
-- Line Number Handling
-Add a module that will take care of number handling
-and as a byproduct, deal with using the same name
+### Want
+- warn about binary files and exit...
 
 
-```
-folder
-    file.md
-    file.md
-    file.md
-folder
-    file.md
-    file.md
-```
+### Nice
 
-With a argument like:
+- deal with binary files (keep content but don't display)
 
-```python
-create_folders(source_file, output, numbering = true, pad = 2)
-```
 
-```
-01 folder
-    01 file.md
-    02 file.md
-    03 file.md
-02 folder
-    01 file.md
-    02 file.md
-```
 
-Possibly with more advanced config like
 
-```python
-numbering_config = {
-    global_config : {
-        numbering : true,
-        pad : true,
-        delete_existing_format: "^\d{3} " # Will remove existing numbering if match
-    },
-    custom_configs: [
-        {
-            tab_level: 0, # Will override numbering at that tab level
-            pad: 3
-        }
-    ]
-}
-```
 
-Maybe even there is some kind of analyzer that checks for padding and recommends...
+
