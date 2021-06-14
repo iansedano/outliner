@@ -7,6 +7,8 @@ structure and the files and their contents.
 # It could potentially be added to the node so that the next stage would have
 # it easy...
 
+from outline_parser.parser import token
+
 class Node:
 	def __init__(self, node_type = None, value = None):
 		self.node_type = node_type
@@ -15,13 +17,13 @@ class Node:
 
 # <ROOT> <FOLDER> <FILE> <CONTENT>
  
-def build_tree(tok):
+def build_tree(tok: token):
 
 	root = Node("<ROOT>", "root")
 	current_tab_level = 0
 
 	root.children, _temp = build_helper(tok, [root])
-
+	
 	return root
 
 

@@ -1,15 +1,15 @@
 """Stage 4 (Optional)
-Takes the root of a tree and numbers all the siblings
+Takes the root of a tree and numbers all the siblings, eg:
 
-Root
-	01
-	02
+	Root
 		01
 		02
-	03
-	04
+			01
+			02
+		03
+		04
 """
-from counter import Counter
+from utils import Counter
 
 def number_tree(root, pad):
 	folders = []

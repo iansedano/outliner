@@ -1,33 +1,29 @@
-from o_lexer import lex
-from o_parser import parse
-from o_ast import build_tree
-from add_numbers import number_tree
+import outline_parser
 
-import os
 from pathlib import Path
 import shutil
 
-def create(node, name):
 
+def build_dir_structure(node, name):
+	"""
+	TODO - Is this function even needed?
+	"""
 	path = Path.cwd() / "output" / name
+	build_helper(node, path)
 	
-
-	create_helper(node, path)
-	
-
-
-def create_helper(node, path):
-
+def build_helper(node, path):
+	"""
+	"""
 	if node.node_type == '<ROOT>':
 		for n in node.children:
-			create_helper(n, path)
+			build_helper(n, path)
 
 	elif node.node_type == '<FOLDER>':
 		folder_path = path / node.value
 		if not folder_path.exists():
 			Path.mkdir(folder_path, parents=True)
 		for n in node.children:
-			create_helper(n, folder_path)
+			build_helper(n, folder_path)
 
 	elif node.node_type == '<FILE>':
 		file_path = path / node.value
@@ -37,13 +33,14 @@ def create_helper(node, path):
 					raise Exception("invalid content")
 				f.write(c.value)
 
-
 def create_main(source, output_path, number = False):
-
+	"""
+	TODO - Does some of this function belong elsewhere?
+	"""
 	source = Path(source)
 	if not Path.is_file(source):
 		raise Exception("invalid file")
-
+	
 	output_path = Path(output_path)
 	if output_path.exists():
 		shutil.rmtree(output_path)
@@ -52,14 +49,14 @@ def create_main(source, output_path, number = False):
 	
 	with open(source) as mydata:
 		source_text = mydata.read()
-	lexemes = lex(source_text)
-	tokens = parse(lexemes)
-	tree_root = build_tree(tokens)
+	lexemes = outline_parser.lex(source_text)
+	tokens = outline_parser.parse(lexemes)
+	tree_root = outline_parser.build_tree(tokens)
 
 	if number == True:
-		number_tree(tree_root, 3)
+		outline_parser.number_tree(tree_root, 3)
 
-	create_helper(tree_root, output_path)
+	build_helper(tree_root, output_path)
 
 
 
@@ -91,7 +88,7 @@ if __name__ == "__main__":
 
 	print("\n\n=====STARTING=====\n\n")
 
-	create(tree1, "1")
-	create(tree2, "2")
-	create(tree3, "3")
-	create(tree4, "4")
+	build_dir_structure(tree1, "1")
+	build_dir_structure(tree2, "2")
+	build_dir_structure(tree3, "3")
+	build_dir_structure(tree4, "4")

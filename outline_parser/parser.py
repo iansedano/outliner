@@ -14,6 +14,7 @@ lexeme until it reaches something it identifies as a file. Then everything a tab
 level or more greater than the file, is considered a file.
 """
 
+from outline_parser.lexer import Lexeme
 
 class token:
 	def __init__(
@@ -29,8 +30,8 @@ class token:
 		self.line_no 	= line_no
 		self.next 		= None
 
-def parse(root_lex):
-
+def parse(root_lex: Lexeme):
+	
 	flags = {
 		'tok_type': None,
 		'current_value': None,
@@ -77,7 +78,7 @@ def parse(root_lex):
 				line_no += 1
 				prev_tab_level = tab_level
 				tab_level = 0
-
+			
 			elif lex.tok_type == '<TAB>':
 				
 				tab_level += 1

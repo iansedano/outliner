@@ -1,0 +1,54 @@
+tests\test_output\
+tests\test_output\1
+tests\test_output\1\06-basic_syntax
+tests\test_output\1\07-primitive_data_types
+tests\test_output\1\08-arrays
+tests\test_output\1\09-objects
+tests\test_output\1\10-conditional_statements
+tests\test_output\1\11-functions
+tests\test_output\1\12-loops
+tests\test_output\1\13-advanced_iteration
+tests\test_output\1\14-manipulating_dom
+tests\test_output\1\15-events
+tests\test_output\1\16-working_with_api
+tests\test_output\1\17-requests
+tests\test_output\1\18-api_project_starter_files
+tests\test_output\2
+tests\test_output\2\last folder
+tests\test_output\2\last folder\finalfile.js
+helloworld
+tests\test_output\2\myfolder
+tests\test_output\2\myfolder\myfile.txt
+helloworld
+
+tests\test_output\2\myfolder\nextfolder
+tests\test_output\2\myfolder\nextfolder\anotherfolder
+tests\test_output\2\myfolder\nextfolder\anotherfolder\myfile.txt
+helloworld
+
+tests\test_output\3
+tests\test_output\3\last folder
+tests\test_output\3\last folder\finalfile.js
+console.log("hello world");
+tests\test_output\3\myfolder
+tests\test_output\3\myfolder\myfile.py
+def hi(x):
+	x = x * 2
+	return x
+
+tests\test_output\3\myfolder\myfile.txt
+mycontents
+morecontents
+
+tests\test_output\3\myfolder\nextfolder
+tests\test_output\3\myfolder\nextfolder\anotherfolder
+tests\test_output\3\myfolder\nextfolder\anotherfolder\myfile.txt
+helloworld
+
+tests\test_output\3\myfolder\nextfolder\emptyfile.md
+
+tests\test_output\4
+tests\test_output\4\folder root
+tests\test_output\4\myfolder
+tests\test_output\4\myfolder\folder2
+tests\test_output\4\myfolder\folder2\folder3
