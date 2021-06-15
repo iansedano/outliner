@@ -70,21 +70,21 @@ if __name__ == "__main__":
 		data3 = mydata.read()
 	with open('test_files\\folderstruct4.txt') as mydata:
 		data4 = mydata.read()
-
-	lexemes1 = lex(data1)
-	lexemes2 = lex(data2)
-	lexemes3 = lex(data3)
-	lexemes4 = lex(data4)
-
-	second_pass1 = parse(lexemes1)
-	second_pass2 = parse(lexemes2)
-	second_pass3 = parse(lexemes3)
-	second_pass4 = parse(lexemes4)
-
-	tree1 = build_tree(second_pass1)
-	tree2 = build_tree(second_pass2)
-	tree3 = build_tree(second_pass3)
-	tree4 = build_tree(second_pass4)
+	
+	lexemes1 = outline_parser.lex(data1)
+	lexemes2 = outline_parser.lex(data2)
+	lexemes3 = outline_parser.lex(data3)
+	lexemes4 = outline_parser.lex(data4)
+	
+	second_pass1 = outline_parser.parse(lexemes1)
+	second_pass2 = outline_parser.parse(lexemes2)
+	second_pass3 = outline_parser.parse(lexemes3)
+	second_pass4 = outline_parser.parse(lexemes4)
+	
+	tree1 = outline_parser.build_tree(second_pass1)
+	tree2 = outline_parser.build_tree(second_pass2)
+	tree3 = outline_parser.build_tree(second_pass3)
+	tree4 = outline_parser.build_tree(second_pass4)
 
 	print("\n\n=====STARTING=====\n\n")
 

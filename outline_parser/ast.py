@@ -60,8 +60,8 @@ def build_helper(tok, path):
 
 def print_children(root, level = 0):
 
-	tab = '\t'*level
-
+	tab = '\t' * level
+	
 	print(tab, root.node_type, root.value)
 
 	if root.children != []:
