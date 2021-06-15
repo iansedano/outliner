@@ -12,6 +12,9 @@ will be interpreted as a file.
 CONTENT is identified as everything "beneath" a file. The parser goes lexeme by
 lexeme until it reaches something it identifies as a file. Then everything a tab
 level or more greater than the file, is considered a file.
+
+TODO - The right name for this is probably the lexing or evaluating stage while
+TODO - the previous stage is the scanning stage
 """
 
 from outline_parser.lexer import Lexeme
