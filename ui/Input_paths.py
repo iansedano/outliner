@@ -3,6 +3,8 @@ from PySide6.QtCore import Qt
 
 from .Path_selector import Path_selector
 
+import dir_builder
+
 class Input_paths(QWidget):
     def __init__(self):
         super().__init__()
@@ -31,6 +33,6 @@ class Input_paths(QWidget):
         
         if not input_file or not output_folder:
             raise Exception("Invalid Input or Output")
-            
-        print(input_file, output_folder)
+        
+        dir_builder.create_main(input_file, output_folder, number = True)
         
