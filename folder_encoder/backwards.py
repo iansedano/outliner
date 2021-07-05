@@ -1,11 +1,11 @@
 from pathlib import Path
 
-def make_outline(
+def make_outline_helper(
 	folder: Path,
 	output_file,
 	tab_level = 0,
-	remove_prefix = False,
-	prefix_length = 3
+	remove_prefix = True,
+	prefix_length = 4
 ):
 	for path in folder.iterdir():
 		tabs = "\t" * tab_level
@@ -14,7 +14,7 @@ def make_outline(
 			name = name[prefix_length:]
 		print(tabs + name, file=output_file)
 		if path.is_dir():
-			make_outline(
+			make_outline_helper(
 				path,
 				output_file,
 				tab_level + 1,
@@ -26,14 +26,18 @@ def make_outline(
 				for line in text_file.readlines():
 					print(tabs + "\t" + line, end="", file=output_file)
 
-root_dir = "C:\\Dev\\0 Git sync\\react-course\\00-js2-react\\Course-01-Advanced JS\\004-Dashboard"
-output_file = "C:\\Dev\\0 Git sync\\react-course\\00-js2-react\\000-temp_outlines\\004-Dashboard.txt"
-
-root_dir = Path(root_dir)
-output_file = Path(output_file)
-
-with output_file.open(mode="w") as f:
-	make_outline(root_dir, f, remove_prefix = True, prefix_length = 4)
+def make_outline(
+	folder: Path,
+	output_file,
+	tab_level = 0,
+	remove_prefix = True,
+	prefix_length = 4
+):
+	folder = Path(folder)
+	output_file = Path(output_file)
+	
+	with output_file.open(mode="w") as f:
+		make_outline_helper(folder, f, tab_level, remove_prefix, prefix_length)
 
 
 

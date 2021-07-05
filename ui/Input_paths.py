@@ -4,6 +4,7 @@ from PySide6.QtCore import Qt
 from .Path_selector import Path_selector
 
 import dir_builder
+import folder_encoder
 
 class Input_paths(QWidget):
     def __init__(self):
@@ -26,6 +27,12 @@ class Input_paths(QWidget):
         
         layout.addWidget(button, alignment=Qt.AlignCenter)
         
+        button_rev = QPushButton("Backwards")
+        button_rev.clicked.connect(self.handleBackwards)
+        button_rev.setFixedSize(100, 40)
+        
+        layout.addWidget(button_rev, alignment=Qt.AlignCenter)
+        
     
     def handleExecute(self):
         input_file = self.file_selector.get_path()
@@ -35,4 +42,12 @@ class Input_paths(QWidget):
             raise Exception("Invalid Input or Output")
         
         dir_builder.create_main(input_file, output_folder, number = True)
+    
+    def handleBackwards(self):
+        input_file = self.file_selector.get_path()
+        output_folder = self.folder_selector.get_path()
         
+        if not input_file or not output_folder:
+            raise Exception("Invalid Input or Output")
+        
+        folder_encoder.make_outline(output_folder, input_file)
