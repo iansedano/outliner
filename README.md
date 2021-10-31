@@ -180,3 +180,28 @@ create_main(source_file, output, number = True)
 ```
 
 This tool uses `pathlib` so Windows or Linux paths will work here.
+
+
+## Building executable from source
+
+With pyinstaller installed
+
+```
+pyinstaller -F -w .\main_with_ui.py
+```
+
+The flag are optional:
+- `-F` is to create a one file executable instead of a folder
+- `-w` so that only the GUI appears, not the console
+
+https://pyinstaller.readthedocs.io/en/stable/usage.html
+
+If Python 3.10.0 you'll need to:
+
+```
+pyinstaller -F -w .\main_with_ui.py --exclude-module _bootlocale
+```
+
+As per:
+
+https://stackoverflow.com/questions/68459087/pyinstaller-with-python-3-10-0b4-importerror-no-module-named-bootlocale
